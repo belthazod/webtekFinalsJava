@@ -4,15 +4,16 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<% 
+    
+%>
 <html>
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <jsp:include page="WEB-INF/head-elements.jsp"/>
         
     </head>
     <body>
@@ -32,7 +33,7 @@ and open the template in the editor.
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
+             <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#">Action</a></li>
@@ -43,20 +44,38 @@ and open the template in the editor.
                   <li><a href="#">Separated link</a></li>
                   <li><a href="#">One more separated link</a></li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
             
-            <form class="navbar-form navbar-left" role="login">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Username">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-default">Log in</button>
-          </form>
+            <form id="loginForm"  class="navbar-form navbar-left" role="login" action="Login" method="POST">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Username" name="username">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+                <button type="submit" class="btn btn-default">Log in</button>
+            </form>
           </div><!--/.nav-collapse -->
           
+          <%
+              String loginStatus = request.getParameter("loginfailed");
+              if(loginStatus!=null && loginStatus.equals("user")){
+                out.print("<div class='alert alert-danger' role='alert'>"+
+                "<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"+
+                "<span class='sr-only'>Incorrect Employee Id:</span>"+
+                "The employee ID you entered does not belong to any employee. " + 
+                "Make sure that it is typed correctly."+
+              "</div>");
+            }else if(loginStatus!=null && loginStatus.equals("password")){
+                out.print("<div class='alert alert-danger' role='alert'>"+
+                "<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"+
+                "<span class='sr-only'>Incorrect Password:</span>"+
+                "The password you have entered for that account is invalid. " + 
+                "Make sure that it is typed correctly."+
+              "</div>");
+            }
+          %>
           <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
