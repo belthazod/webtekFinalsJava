@@ -7,11 +7,17 @@ and open the template in the editor.
     Created on : 05 8, 15, 4:47:42 PM
     Author     : Belthazod
 */
-
-#subjectsTable th{
+#subjectsTable{
+    margin-top:30px;
+}
+#subjectsTable th, #semesterTable th{
     cursor:pointer;
 }
-#subjectsTable th:hover{
+#subjectsTable th:hover, #semesterTable th:hover{
     color:skyblue;
     -webkit-animation: all 5s ease;
 }
+.example_result{
+    min-height:300px;
+}
+

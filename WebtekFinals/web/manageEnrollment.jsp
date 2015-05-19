@@ -14,10 +14,12 @@
         <div class='container'>
         <jsp:include page="WEB-INF/nav-elements.jsp" />
 
-        <div class="example">
-            <h2 class="example_head">Manage Enrollment</h2>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Manage Enrollment</h3>
+            </div>
             <div class="example_result notranslate">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="semesterTable">
                 <thead>
                     <tr>
                       <th>Semester</th>
@@ -64,8 +66,18 @@
                 </tbody>
                 </table>
             </div>
+                <div class="panel-footer">School of Computing & Information Sciences</div>
             </div>
         </div>
         <jsp:include page="WEB-INF/footer-elements.jsp" />
+        <script>
+            var nav = document.getElementById("navigation");
+            nav.getElementsByTagName("li")[2].className += "active";
+            $(document).ready(function() 
+                { 
+                    $("#semesterTable").tablesorter();
+                } 
+            );
+        </script>
     </body>
 </html>

@@ -15,13 +15,12 @@ and open the template in the editor.
 <html>
     <head>
         <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <jsp:include page="WEB-INF/head-elements.jsp"/>
         
     </head>
     <body>
+        <div class="container">
         <nav class="navbar navbar-default">
         <div class="container">
           <div class="navbar-header">
@@ -62,7 +61,7 @@ and open the template in the editor.
                 <button type="submit" class="btn btn-default">Log in</button>
             </form>
           </div><!--/.nav-collapse -->
-          
+          </nav>
           <%
               String loginStatus = request.getParameter("loginfailed");
               String logoutStatus = request.getParameter("logout");
@@ -121,7 +120,7 @@ and open the template in the editor.
             </a>
           </div>
         </div>
-      </nav>
+       
         <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/script.js"></script>
 	<script src="js/bootstrap.min.js"></script>
