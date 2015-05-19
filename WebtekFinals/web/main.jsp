@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Webtek Project Finals</title>
+        <title>SLU Online Enrollment</title>
         <jsp:include page="WEB-INF/head-elements.jsp" />
     </head>
     <body>

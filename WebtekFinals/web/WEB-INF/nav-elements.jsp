@@ -25,12 +25,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp">Webtek Project</a>
+        <a class="navbar-brand" href="index.jsp">SLU Online Enrollment</a>
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav" id="navigation">
           <li><a href="index.jsp">Home</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="about.jsp">About</a></li>
+          <li><a href="contact.jsp">Contact</a></li>
           <%
               if(session.getAttribute("Type") != null && session.getAttribute("Type").equals("department head")){
                   out.print("<li><a href='manageEnrollment.jsp'>Manage Enrollment</a></li>");
@@ -38,6 +39,8 @@
                   out.print("<li><a href='enrollmentRequests.jsp'>Enrollment Requests</a></li>");
               }
           %>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
           <li><a href="LogOut">Log out</a></li>
           
         </ul>
