@@ -31,7 +31,7 @@
 </sql:query>
     
 <sql:query dataSource="${database}"  var="classStudentsResult" >
-    SELECT idno, lastname, firstname, year, scheduleStatus FROM (student JOIN schedule ON schedule.idnum = student.idno) JOIN scheduledetails USING(scheduleid) WHERE classcode = ?;
+    SELECT idno, lastname, firstname, year, status FROM (student JOIN enrollment USING(idno)) JOIN enrollmentdetails USING(enrolid) WHERE classcode = ?;
     <sql:param value="${param.code}" />
 </sql:query>
             
@@ -116,7 +116,7 @@
                                 <td><c:out value="${classStudentsRows.idno}"/></td>
                                 <td><c:out value="${classStudentsRows.lastname}" />, <c:out value="${classStudentsRows.firstname}" /></td>
                                 <td><c:out value="${classStudentsRows.year}" /></td>
-                                <td><c:out value="${classStudentsRows.scheduleStatus}" /></td>
+                                <td><c:out value="${classStudentsRows.status}" /></td>
                             </tr>
                         </c:forEach>
                     </tbody>

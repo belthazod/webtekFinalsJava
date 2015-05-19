@@ -35,8 +35,7 @@
           <%
               if(session.getAttribute("Type") != null && session.getAttribute("Type").equals("department head")){
                   out.print("<li><a href='manageEnrollment.jsp'>Manage Enrollment</a></li>");
-                  out.print("<li><a href='enrollmentStatus.jsp'>View Status</a></li>");
-                  out.print("<li><a href='enrollmentRequests.jsp'>Enrollment Requests</a></li>");
+                  out.print("<li><a href='enrollmentRequests.jsp'>Adding/Changing Requests</a></li>");
               }
           %>
         </ul>
