@@ -81,11 +81,12 @@
                     </li>
                 </ul>
                 </div>
-                      <div class="row">
+                <div class="row">
                 <div class="col-md-4">
                     <div class="input-group">
 
                       <input type="text" class="form-control" placeholder="Search for Course No..." id="searchInput">
+                      <span class='glyphicon glyphicon-remove' id='deleteSearch' onclick='clearSearch()'></span>
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button" onclick="search()">Go!</button>
                       </span>
@@ -281,7 +282,8 @@
             var nav = document.getElementById("navigation");
             nav.getElementsByTagName("li")[2].className += "active";
                     <c:if test="${!empty param.search }">
-                        document.getElementById("searchInput").value = <c:out value="${param.search}"/>;
+                        document.getElementById("searchInput").value = "<c:out value="${param.search}"/>";
+                        document.getElementById("deleteSearch").style.display = "block";
                     </c:if>
             /*var tbody = document.getElementById("subjectsTBody");
             var count = tbody.getElementsByTagName("tr").length;
@@ -289,9 +291,12 @@
             tbody.getElements*/
             function search(){
                 var parameter = document.getElementById("searchInput").value;
-                location.assign("manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&search="+parameter+<c:if test="${!empty param.filter }">
-                        "&filter=<c:out value="${param.filter}"/>"
+                location.assign("manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&search="+parameter<c:if test="${!empty param.filter }">
+                        +"&filter=<c:out value="${param.filter}"/>"
                     </c:if>);
+            }
+            function clearSearch(){
+                location.assign("manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/><c:if test="${!empty param.filter }">&filter=<c:out value="${param.filter}"/></c:if>");
             }
         </script>
         </c:forEach>

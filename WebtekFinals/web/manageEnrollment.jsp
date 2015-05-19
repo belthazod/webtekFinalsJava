@@ -41,7 +41,7 @@
                             
                             out.print("<tr>");
                             out.print("<td><a href='manageSubjects.jsp?semester=" + semesterID + "'>" + semester + " " + year + "</a></td>");
-                            out.print("<td>"+ enrollees+"</td>");
+                            out.print("<td><a title='Click to view the list of all enrolled students' href='viewEnrollees.jsp?semester=" + semesterID + "'>" + enrollees+"</a></td>");
                             out.print("<td>");
                             if(status.equals("ended")){
                                 out.print("Ended");
