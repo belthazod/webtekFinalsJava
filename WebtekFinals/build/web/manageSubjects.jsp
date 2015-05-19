@@ -55,7 +55,7 @@
                 <h3 class="panel-title">Subjects for this semester</h3>
             </div>
             <div class="example_result notranslate panel-body">
-
+                <div class="col-md-12">
                  <ul class="list-group col-md-2">
                     <li class="list-group-item">
                       <span class="badge"><c:out value="${row.enrolleeCount}"/></span>
@@ -80,13 +80,14 @@
                       Closed
                     </li>
                 </ul>
+                </div>
                       <div class="row">
                 <div class="col-md-4">
                     <div class="input-group">
 
-                      <input type="text" class="form-control" placeholder="Search for...">
+                      <input type="text" class="form-control" placeholder="Search for Course No..." id="searchInput">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
+                        <button class="btn btn-default" type="button" onclick="search()">Go!</button>
                       </span>
                     </div><!-- /input-group -->
                 </div><!-- /.col-lg-6 -->
@@ -96,15 +97,21 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}&filter=OPEN"/>">Open</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&filter=OPEN<c:if test="${!empty param.search }">&search=<c:out value="${param.search}"/>
+                    </c:if>">Open</a></li>
                       <li class="divider"></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}&filter=OPEN TO SCHOOL"/>">Open to school</a></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}&filter=OPEN TO ALL"/>">Open to all schools</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&filter=OPEN TO SCHOOL<c:if test="${!empty param.search }">&search=<c:out value="${param.search}"/>
+                    </c:if>">Open to school</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&filter=OPEN TO ALL<c:if test="${!empty param.search }">&search=<c:out value="${param.search}"/>
+                    </c:if>">Open to all schools</a></li>
                       <li class="divider"></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}&filter=DISSOLVED"/>">Dissolved</a></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}&filter=CLOSED"/>">Closed</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&filter=DISSOLVED<c:if test="${!empty param.search }">&search=<c:out value="${param.search}"/>
+                    </c:if>">Dissolved</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&filter=CLOSED<c:if test="${!empty param.search }">&search=<c:out value="${param.search}"/>
+                    </c:if>">Closed</a></li>
                       <li class="divider"></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>">All</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/><c:if test="${!empty param.search }">&search=<c:out value="${param.search}"/>
+                    </c:if>">All</a></li>
                     </ul>
                 </div>
                   </div>
@@ -126,53 +133,123 @@
                 <c:forEach var="classesRow" items="${subjectsResult.rows}">
                     <c:choose>
                     <c:when test="${param.filter == null}">
-                    <tr>
-                        
-                        <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
-                        <td type="text" class="popover-hide" 
-      title="<c:out value="${classesRow.courseno}"/>" data-container="body" data-html="true"
-      data-toggle="popover" data-placement="right" 
-      data-content="<c:out value="${classesRow.description}"/><hr><c:out value="${classesRow.units}"/> units"  data-trigger="hover"><c:out value="${classesRow.courseno}"/></td>
-                        <td><c:out value="${classesRow.days}"/></td>
-                        <td><c:out value="${classesRow.time}"/></td>
-                        <td><c:out value="${classesRow.room}"/></td>
-                        <td><c:out value="${classesRow.slots}"/></td>
-                        <td><c:out value="${classesRow.reserved}"/></td>
-                        <td><c:out value="${classesRow.enrolled}"/></td>
-                        
-                        <td><c:out value="${classesRow.status}"/></td>
-                        
-                    </tr>
+                        <c:choose>
+                            
+                            <c:when test="${param.search != null && fn:contains(fn:toLowerCase(classesRow.courseno), fn:toLowerCase(param.search) )}">
+                                <tr>
+
+                                    <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
+                                    <td type="text" class="popover-hide" 
+                  title="<c:out value="${classesRow.courseno}"/>" data-container="body" data-html="true"
+                  data-toggle="popover" data-placement="right" 
+                  data-content="<c:out value="${classesRow.description}"/><hr><c:out value="${classesRow.units}"/> units"  data-trigger="hover"><c:out value="${classesRow.courseno}"/></td>
+                                    <td><c:out value="${classesRow.days}"/></td>
+                                    <td><c:out value="${classesRow.time}"/></td>
+                                    <td><c:out value="${classesRow.room}"/></td>
+                                    <td><c:out value="${classesRow.slots}"/></td>
+                                    <td><c:out value="${classesRow.reserved}"/></td>
+                                    <td><c:out value="${classesRow.enrolled}"/></td>
+
+                                    <td><c:out value="${classesRow.status}"/></td>
+
+                                </tr>
+                            </c:when>
+                            <c:when test="${param.search == null}">
+                                <tr>
+
+                                    <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
+                                    <td type="text" class="popover-hide" 
+                  title="<c:out value="${classesRow.courseno}"/>" data-container="body" data-html="true"
+                  data-toggle="popover" data-placement="right" 
+                  data-content="<c:out value="${classesRow.description}"/><hr><c:out value="${classesRow.units}"/> units"  data-trigger="hover"><c:out value="${classesRow.courseno}"/></td>
+                                    <td><c:out value="${classesRow.days}"/></td>
+                                    <td><c:out value="${classesRow.time}"/></td>
+                                    <td><c:out value="${classesRow.room}"/></td>
+                                    <td><c:out value="${classesRow.slots}"/></td>
+                                    <td><c:out value="${classesRow.reserved}"/></td>
+                                    <td><c:out value="${classesRow.enrolled}"/></td>
+
+                                    <td><c:out value="${classesRow.status}"/></td>
+
+                                </tr>
+                            </c:when>
+                        </c:choose>
                     </c:when>
                     <c:when test="${param.filter != null && param.filter == 'OPEN' && (classesRow.status == 'OPEN TO SCHOOL' || classesRow.status == 'OPEN TO ALL')}">
-                    <tr>
-                        
-                        <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
-                        <td><c:out value="${classesRow.courseno}"/></td>
-                        <td><c:out value="${classesRow.days}"/></td>
-                        <td><c:out value="${classesRow.time}"/></td>
-                        <td><c:out value="${classesRow.room}"/></td>
-                        <td><c:out value="${classesRow.slots}"/></td>
-                        <td><c:out value="${classesRow.reserved}"/></td>
-                        <td><c:out value="${classesRow.enrolled}"/></td>
-                        <td><c:out value="${classesRow.status}"/></td>
-                        
-                    </tr>
+                        <c:choose>
+                            <c:when test="${param.search != null && fn:contains(fn:toLowerCase(classesRow.courseno), fn:toLowerCase(param.search) )}">
+                            <tr>
+
+                                <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
+                                <td type="text" class="popover-hide" 
+                  title="<c:out value="${classesRow.courseno}"/>" data-container="body" data-html="true"
+                  data-toggle="popover" data-placement="right" 
+                  data-content="<c:out value="${classesRow.description}"/><hr><c:out value="${classesRow.units}"/> units"  data-trigger="hover"><c:out value="${classesRow.courseno}"/></td>
+                                <td><c:out value="${classesRow.days}"/></td>
+                                <td><c:out value="${classesRow.time}"/></td>
+                                <td><c:out value="${classesRow.room}"/></td>
+                                <td><c:out value="${classesRow.slots}"/></td>
+                                <td><c:out value="${classesRow.reserved}"/></td>
+                                <td><c:out value="${classesRow.enrolled}"/></td>
+                                <td><c:out value="${classesRow.status}"/></td>
+
+                            </tr>
+                            </c:when>
+                            <c:when test="${param.search == null}">
+                            <tr>
+
+                                <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
+                                <td type="text" class="popover-hide" 
+                  title="<c:out value="${classesRow.courseno}"/>" data-container="body" data-html="true"
+                  data-toggle="popover" data-placement="right" 
+                  data-content="<c:out value="${classesRow.description}"/><hr><c:out value="${classesRow.units}"/> units"  data-trigger="hover"><c:out value="${classesRow.courseno}"/></td>
+                                <td><c:out value="${classesRow.days}"/></td>
+                                <td><c:out value="${classesRow.time}"/></td>
+                                <td><c:out value="${classesRow.room}"/></td>
+                                <td><c:out value="${classesRow.slots}"/></td>
+                                <td><c:out value="${classesRow.reserved}"/></td>
+                                <td><c:out value="${classesRow.enrolled}"/></td>
+                                <td><c:out value="${classesRow.status}"/></td>
+
+                            </tr>
+                            </c:when>
+                        </c:choose>
                     </c:when>
                     <c:when test="${param.filter != null && param.filter == classesRow.status}">
-                    <tr>
-                        
-                        <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
-                        <td><c:out value="${classesRow.courseno}"/></td>
-                        <td><c:out value="${classesRow.days}"/></td>
-                        <td><c:out value="${classesRow.time}"/></td>
-                        <td><c:out value="${classesRow.room}"/></td>
-                        <td><c:out value="${classesRow.slots}"/></td>
-                        <td><c:out value="${classesRow.reserved}"/></td>
-                        <td><c:out value="${classesRow.enrolled}"/></td>
-                        <td><c:out value="${classesRow.status}"/></td>
-                        
-                    </tr>
+                        <c:choose>
+                            <c:when test="${param.search != null && fn:contains(fn:toLowerCase(classesRow.courseno), fn:toLowerCase(param.search))}">
+                                <tr>
+                                    <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
+                                    <td type="text" class="popover-hide" 
+                  title="<c:out value="${classesRow.courseno}"/>" data-container="body" data-html="true"
+                  data-toggle="popover" data-placement="right" 
+                  data-content="<c:out value="${classesRow.description}"/><hr><c:out value="${classesRow.units}"/> units"  data-trigger="hover"><c:out value="${classesRow.courseno}"/></td>
+                                    <td><c:out value="${classesRow.days}"/></td>
+                                    <td><c:out value="${classesRow.time}"/></td>
+                                    <td><c:out value="${classesRow.room}"/></td>
+                                    <td><c:out value="${classesRow.slots}"/></td>
+                                    <td><c:out value="${classesRow.reserved}"/></td>
+                                    <td><c:out value="${classesRow.enrolled}"/></td>
+                                    <td><c:out value="${classesRow.status}"/></td>
+                                </tr>
+                            </c:when>
+                            <c:when test="${param.search == null}">
+                                <tr>
+                                    <td><a href='viewClass.jsp?code=<c:out value="${classesRow.classcode}"/>&semester=<c:out value="${param.semester}"/>'><c:out value="${classesRow.classcode}"/></a></td>
+                                    <td type="text" class="popover-hide" 
+                  title="<c:out value="${classesRow.courseno}"/>" data-container="body" data-html="true"
+                  data-toggle="popover" data-placement="right" 
+                  data-content="<c:out value="${classesRow.description}"/><hr><c:out value="${classesRow.units}"/> units"  data-trigger="hover"><c:out value="${classesRow.courseno}"/></td>
+                                    <td><c:out value="${classesRow.days}"/></td>
+                                    <td><c:out value="${classesRow.time}"/></td>
+                                    <td><c:out value="${classesRow.room}"/></td>
+                                    <td><c:out value="${classesRow.slots}"/></td>
+                                    <td><c:out value="${classesRow.reserved}"/></td>
+                                    <td><c:out value="${classesRow.enrolled}"/></td>
+                                    <td><c:out value="${classesRow.status}"/></td>
+                                </tr>
+                            </c:when>
+                        </c:choose>
                     </c:when>
 
                     </c:choose>
@@ -184,7 +261,7 @@
                 
             </div>
                 <div class="panel-footer">School of Computing & Information Sciences - <c:out value="${row.semester}"/> <c:out value="${row.schoolYear}"/></div>
-                </c:forEach>
+                
             </div>
                     
             </div>
@@ -203,11 +280,20 @@
 
             var nav = document.getElementById("navigation");
             nav.getElementsByTagName("li")[2].className += "active";
-            
+                    <c:if test="${!empty param.search }">
+                        document.getElementById("searchInput").value = <c:out value="${param.search}"/>;
+                    </c:if>
             /*var tbody = document.getElementById("subjectsTBody");
             var count = tbody.getElementsByTagName("tr").length;
             document.getElementById("totalSubjects").innerHTML=count;
             tbody.getElements*/
+            function search(){
+                var parameter = document.getElementById("searchInput").value;
+                location.assign("manageSubjects.jsp?semester=<c:out value="${row.semester_id}"/>&search="+parameter+<c:if test="${!empty param.filter }">
+                        "&filter=<c:out value="${param.filter}"/>"
+                    </c:if>);
+            }
         </script>
+        </c:forEach>
     </body>
 </html>
