@@ -30,13 +30,13 @@ and open the template in the editor.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SLU Online Enrollment</a>
+            <a class="navbar-brand" href="#"><i class="fa fa-university"></i> SLU Online Enrollment</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="about.jsp">About</a></li>
-              <li><a href="contact.jsp">Contact</a></li>
+              <li class="active"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="about.jsp"><i class="fa fa-question-question"></i> About</a></li>
+              <li><a href="contact.jsp"><i class="fa fa-phone"></i> Contact</a></li>
              <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -53,7 +53,7 @@ and open the template in the editor.
             
             <form id="loginForm"  class="navbar-form navbar-left pull-right" role="login" action="Login" method="POST">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Username" name="username">
+                  <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control" placeholder="Password" name="password">
@@ -105,10 +105,10 @@ and open the template in the editor.
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="item active">
-                <img data-src="holder.js/1140x500/auto/#777:#555/text:First slide" alt="" src="img/main.jpg" >
+                <img data-src="holder.js/1140x500/auto/#777:#555/text:First slide" alt="" src="img/main_converted.jpg" >
               </div>
               <div class="item">
-                <img data-src="holder.js/1140x500/auto/#666:#444/text:Second slide" alt="Second slide [1140x500]" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTE0MCIgaGVpZ2h0PSI1MDAiIHZpZXdCb3g9IjAgMCAxMTQwIDUwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnM+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMTQwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiI+PC9yZWN0PjxnPjx0ZXh0IHg9IjM1Mi41IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiM0NDQ7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NTNwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj5TZWNvbmQgc2xpZGU8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
+                <img data-src="holder.js/1140x500/auto/#666:#444/text:Second slide" alt="" src="img/maryheights.jpg" data-holder-rendered="true">
               </div>
               <div class="item">
                 <img data-src="holder.js/1140x500/auto/#555:#333/text:Third slide" alt="Third slide [1140x500]" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTE0MCIgaGVpZ2h0PSI1MDAiIHZpZXdCb3g9IjAgMCAxMTQwIDUwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnM+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMTQwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSI+PC9yZWN0PjxnPjx0ZXh0IHg9IjM5MC41IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiMzMzM7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NTNwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj5UaGlyZCBzbGlkZTwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
